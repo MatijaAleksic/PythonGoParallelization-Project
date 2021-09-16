@@ -4,8 +4,13 @@ import pygame
 from Serial.formular import *
 from Serial.Pendulum import Pendulum
 
+import time
+
+#POCETAK IZVRSAVANJA
+start_time = time.time()
+
 #BROJ KLATNA
-PENDULUM_NUM = 3
+PENDULUM_NUM = 30
 
 #parametri:
 length1 = 1
@@ -22,7 +27,7 @@ angle_acceleration = 0
 #opcije:
 fps = 30
 g = 9.81
-max_time = 5
+max_time = 60
 make_for_30fps = 0.03333333 #0.03333333 #0.001  #za 60fps 0.01666667 #za 30fps 0.03333333
 step = 0.001
 
@@ -98,10 +103,16 @@ for pendulum in pendulums:
         counter += 1
     f.close()
 
+#KRAJ IZVRSAVANJA
+print("\n PROGRAM FINISHED IN --- %s seconds ---" % (time.time() - start_time))
+
 #boje
 black = (0, 0, 0)
 red = (255, 0, 0)
 green = (0, 0, 255)
+
+white = (255,255,255)
+blue = (58,95,205)
 
 
 #Vizuelizacija
