@@ -9,7 +9,7 @@ import (
 )
 
 //BROJ KLATANA
-var pendulum_number = 30
+var pendulum_number = 100
 
 
 var length1 float64 = 1
@@ -28,32 +28,13 @@ var make_for_30fps float64 = 0.03333333
 var step float64= 0.001
 var differ = 0.03
 
-var pendulum_angles1 []float64
-var pendulum_angles2 []float64
-
-var pendulum_velocities1 []float64
-var pendulum_velocities2 []float64
-
-var pendulum_accelerations1 []float64
-var pendulum_accelerations2 []float64
-
-var pendulum_file_names []string
-
 var pendulums []Pendulum
-
-
-//var pendulum_scatter1 []float64
-//var pendulum_scatter2 []float64
 
 var wisteph int = 1928
 var height int = 1020
 var x_offset = int(wisteph/2)
 var y_offset = int(height/4)
 	
-type Touple struct{
-	x1 float64
-	x2 float64
-}
 
 type Quad struct{
 	ang1 float64
@@ -63,7 +44,18 @@ type Quad struct{
 }
 
 type Pendulum struct {
-	index int
+    
+    angle1 float64
+    angle2 float64
+    
+    velocity1 float64
+    velocity2 float64
+    
+    acceleration1 float64
+    acceleration2 float64
+    
+    file_name string
+    
 	p_values []Quad
 }
 
@@ -72,26 +64,26 @@ func main(){
 	start := time.Now()
 
 	for i := 0; i < pendulum_number; i++ {
-		pendulum_angles1 = append(pendulum_angles1, float64(math.Pi) / (float64(2.25) + (float64(i)* float64(0.05))))
-		pendulum_angles2 = append(pendulum_angles2, float64(math.Pi) / (float64(2.25) + (float64(i)* float64(0.05))))
+    
+        var angle1 = float64(math.Pi) / (float64(2.25) + (float64(i)* float64(0.05)))
+        var angle2 = float64(math.Pi) / (float64(2.25) + (float64(i)* float64(0.05)))
+        
+        var pendulum_temp = Pendulum{angle1 : angle1, angle2 : angle2, velocity1: angle_velocity,
+        velocity2 : angle_velocity, acceleration1 : angle_acceleration, acceleration2 : angle_acceleration,
+        file_name : fmt.Sprintf("pendulum%d.txt", i+1)}
 		
-		pendulum_velocities1 = append(pendulum_velocities1, angle_velocity)
-		pendulum_velocities2 = append(pendulum_velocities2, angle_velocity)
-
-		pendulum_accelerations1 = append(pendulum_accelerations1, angle_acceleration)
-		pendulum_accelerations2 = append(pendulum_accelerations2, angle_acceleration)
-
-		pendulum_file_names = append(pendulum_file_names, fmt.Sprintf("pendulum%d.txt", i+1)) 
-		
-		var pendulum_temp = Pendulum{}
-		pendulum_temp.index = i
-		pendulums = append(pendulums, pendulum_temp)
+        pendulums = append(pendulums, pendulum_temp)
+    	
 	}
-	
+    
+    duration0 := time.Since(start)
+    fmt.Print("Part1: ")
+	fmt.Print(duration0)
+    fmt.Print("\n")
 	
 	for i:= 0; i < pendulum_number; i++ {
 	
-		p := Quad{pendulum_angles1[i], pendulum_angles2[i], pendulum_velocities1[i], pendulum_velocities2[i] }
+		p := Quad{pendulums[i].angle1, pendulums[i].angle2, pendulums[i].velocity1, pendulums[i].velocity1}
 		var t float64 = 0
 	
 		for t < float64(max_time) {
@@ -122,6 +114,11 @@ func main(){
 							   
 		}
 	}
+    
+    duration1 := time.Since(start)
+    fmt.Print("Part2: ")
+	fmt.Print(duration1)
+    fmt.Print("\n")
 	
 	var counter int = 0
 	for i:= 0; i < pendulum_number; i++ {
