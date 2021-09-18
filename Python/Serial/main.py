@@ -10,7 +10,7 @@ import time
 start_time = time.time()
 
 #BROJ KLATNA
-PENDULUM_NUM = 30
+PENDULUM_NUM = 10
 
 #parametri:
 length1 = 1
@@ -32,12 +32,12 @@ make_for_30fps = 0.03333333 #0.03333333 #0.001  #za 60fps 0.01666667 #za 30fps 0
 step = 0.001
 
 pendulums = []
-differ = 0.03
+differ = 0.05
 for i in range(PENDULUM_NUM):
     pendulums.append(Pendulum(mass1, mass2, length1, length2, angle0, angle1, angle_velocity, angle_velocity,
                               angle_acceleration, angle_acceleration, f"pendulum{i}.txt"))
-    angle1 = math.pi / (2.2+differ)
-    angle2 = math.pi / (2.2+differ)
+    angle1 = math.pi / (2.25+differ)
+    angle2 = math.pi / (2.25+differ)
     differ = differ + 0.05
 
 # numerical solution
@@ -102,6 +102,15 @@ for pendulum in pendulums:
             counter = 0
         counter += 1
     f.close()
+
+# for pendulum in pendulums:
+#     print(f"Types angle:  {type(p[0])} {p[0]}, ang_v: {type(p[1])} {p[1]}, ang_acc: {type(gamma)} {gamma} ")
+#     print(f"p_values: {len(pendulum.p_values)} ")
+#     print(f"scatter1: {len(pendulum.scatter1)} ")
+#     print(f"scatter2: {len(pendulum.scatter2)} ")
+
+    #print(pendulum.p_values)
+    #print(pendulum.scatter1)
 
 #KRAJ IZVRSAVANJA
 print("\n PROGRAM FINISHED IN --- %s seconds ---" % (time.time() - start_time))

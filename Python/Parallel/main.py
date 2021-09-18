@@ -11,7 +11,7 @@ from multiprocessing import Pool
 start_time = time.time()
 
 #BROJ KLATNA
-PENDULUM_NUM = 30
+PENDULUM_NUM = 10
 
 #parametri:
 length1 = 1
@@ -33,7 +33,7 @@ make_for_30fps = 0.03333333 #0.03333333 #0.001  #za 60fps 0.01666667 #za 30fps 0
 step = 0.001
 
 pendulums = []
-differ = 0.03
+differ = 0.05
 
 ##################################################
 #os.environ["SDL_VIDEO_CENTERED"] = "1"
@@ -97,8 +97,8 @@ if __name__ == '__main__':
     for i in range(PENDULUM_NUM):
         pendulums.append(Pendulum(mass1, mass2, length1, length2, angle0, angle1, angle_velocity, angle_velocity,
                                   angle_acceleration, angle_acceleration, f"pendulum{i}.txt"))
-        angle1 = math.pi / (2.2+differ)
-        angle2 = math.pi / (2.2+differ)
+        angle1 = math.pi / (2.25+differ)
+        angle2 = math.pi / (2.25+differ)
         differ = differ + 0.05
 
     #PARALELIZACIJA
