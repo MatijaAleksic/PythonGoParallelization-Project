@@ -9,7 +9,7 @@ import (
 )
 
 //BROJ KLATANA
-var pendulum_number = 100
+var pendulum_number = 30
 
 
 var length1 float64 = 1
@@ -26,7 +26,7 @@ var g float64 = 9.81
 var max_time = 60
 var make_for_30fps float64 = 0.03333333
 var step float64= 0.001
-var differ = 0.03
+var differ = 0.2
 
 var pendulums []Pendulum
 
@@ -67,7 +67,8 @@ func main(){
     
         var angle1 = float64(math.Pi) / (float64(2.25) + (float64(i)* float64(0.05)))
         var angle2 = float64(math.Pi) / (float64(2.25) + (float64(i)* float64(0.05)))
-        
+        differ = differ + 0.2
+		
         var pendulum_temp = Pendulum{angle1 : angle1, angle2 : angle2, velocity1: angle_velocity,
         velocity2 : angle_velocity, acceleration1 : angle_acceleration, acceleration2 : angle_acceleration,
         file_name : fmt.Sprintf("pendulum%d.txt", i+1)}
@@ -76,10 +77,6 @@ func main(){
     	
 	}
     
-    duration0 := time.Since(start)
-    fmt.Print("Part1: ")
-	fmt.Print(duration0)
-    fmt.Print("\n")
 	
 	for i:= 0; i < pendulum_number; i++ {
 	
@@ -115,10 +112,6 @@ func main(){
 		}
 	}
     
-    duration1 := time.Since(start)
-    fmt.Print("Part2: ")
-	fmt.Print(duration1)
-    fmt.Print("\n")
 	
 	var counter int = 0
 	for i:= 0; i < pendulum_number; i++ {
