@@ -1,4 +1,4 @@
-# NTP-Projekat
+# Python - Paralelizacija(Python&Go)
 
 ## Double Pendulum Simulation
 
